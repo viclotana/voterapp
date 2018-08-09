@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended:false}));
  
 //enable cors
 app.use(cors());
-app.use('/vote',poll);
+app.use('/poll',poll);
 
 const port = 5000;
 
