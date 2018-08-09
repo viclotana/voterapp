@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pusher = require('pusher');
+const Pusher = require('pusher');
 
 var pusher = new Pusher({
     appId: '575181',
@@ -15,7 +15,10 @@ router.get('/', (req, res) => {
 
 router.post('/', (req,res) =>{
     pusher.trigger('got-poll', 'got-vote', {
-        
+        points: 1,
+        got:req.body.got
       });
-})
+      return res.json({success:true,
+    message:'Thanks for voting'});
+});
 module.exports = router;
