@@ -23,4 +23,41 @@ let dataPoints = [
     {label: 'John Snow', y:0}
 ];
 
-const chartContainer = document.querySelector('#chartContainer')
+const chartContainer = document.querySelector('#chartContainer');
+
+if (chartContainer) {
+    const chart = new CanvasJS.Chart('chartContainer', {
+        animationEnabled: true,
+        theme: 'theme1',
+        title:{
+          text: 'GOT Results'
+        },
+        data:[
+            {
+                type:'column',
+                dataPoints: dataPoints
+            }
+        ]
+    });
+    chart.render();
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('0af8bb55b80a7fecbf5a', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('got-poll');
+    channel.bind('got-vote', function(data) {
+      dataPoints = dataPoints.map(x => {
+          if (x.label == data.got) {
+              x.y += data.points;
+              return x;
+
+          } else { return x;}
+      });
+      chart.render();
+    });
+}
