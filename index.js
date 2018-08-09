@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
-const poll = require('./routes/vote.js');
+const poll = require('./routes/poll.js');
 
 //set public folder
 app.use(express.static(path.join(__dirname, 'public')));
