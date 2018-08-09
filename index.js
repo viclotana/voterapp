@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
+const poll = require('./routes/vote.js');
 
 //set public folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -11,9 +12,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-
+ 
 //enable cors
 app.use(cors());
+app.use('/vote',poll);
+
 const port = 5000;
 
 //start server
