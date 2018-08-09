@@ -5,4 +5,7 @@ router.get('/', (req, res) => {
     res.send('POLL');
 });
 
+router.post('/', (req,res) =>{
+    
+})
 module.exports = router;
