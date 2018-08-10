@@ -14,7 +14,13 @@ form.addEventListener('submit', (event)=>{
         .then(data => console.log(data))
         .catch(err => console.log(err));
     event.preventDefault();
-})
+});
+
+fetch('http://localhost:5000/poll')
+.then(res => res.json())
+        .then(data =>{
+            console.log(data);
+        })
 
 let dataPoints = [
     {label: 'Ramsey Bolton', y:0},
